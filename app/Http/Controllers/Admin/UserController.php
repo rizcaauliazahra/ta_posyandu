@@ -18,7 +18,7 @@ class UserController extends Controller
                     $sub->where('name', 'like', "%$search%")->orWhere('email', 'like', "%$search%");
                 });
             })
-            ->when(request('role'), function ($q, $role) {
+            ->when(request('role', 'user'), function ($q, $role) {
                 $q->whereHas('role', fn ($r) => $r->where('name', $role));
             })
             ->latest()
