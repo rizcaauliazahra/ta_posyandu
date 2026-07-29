@@ -15,7 +15,11 @@ class UserController extends Controller
         $users = User::with(['role', 'child'])
             ->when(request('q'), function ($q, $search) {
                 $q->where(function ($sub) use ($search) {
-                    $sub->where('name', 'like', "%$search%")->orWhere('email', 'like', "%$search%");
+                    $sub->where('name', 'like', "%$search%")
+                        ->orWhere('email', 'like', "%$search%")
+                        ->orWhereHas('child', function ($childQuery) use ($search) {
+                            $childQuery->where('name', 'like', "%$search%");
+                        });
                 });
             })
             ->when(request('role', 'user'), function ($q, $role) {
