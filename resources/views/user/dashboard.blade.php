@@ -82,10 +82,7 @@
     </div>
 </div>
 
-<!-- Box Saran -->
-<div class="alert alert-info d-none shadow-sm" id="additionalRecommendationBox">
-    <i class="bi bi-chat-left-text-fill me-2"></i><strong>Saran dari Petugas:</strong><br><span id="additionalRecommendationText" class="d-block mt-2"></span>
-</div>
+
 
 @endsection
 
@@ -148,14 +145,6 @@ async function refreshLatestMeasurement() {
             }
             document.getElementById('headCircumferenceNormalBox').textContent = data.latest.hc_normal_limit ? data.latest.hc_normal_limit : '';
             
-            const addBox = document.getElementById('additionalRecommendationBox');
-            const addText = document.getElementById('additionalRecommendationText');
-            if (data.latest.additional_recommendation) {
-                addText.textContent = data.latest.additional_recommendation;
-                addBox.classList.remove('d-none');
-            } else {
-                addBox.classList.add('d-none');
-            }
 
             const liveBanner = document.getElementById('liveStatusBanner');
             const liveText = document.getElementById('liveStatusText');
