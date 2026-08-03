@@ -257,7 +257,7 @@ class MeasurementController extends Controller
         }
 
         $saran = $request->additional_recommendation ? $request->additional_recommendation : '';
-        $petugas = $request->officer_name ? 'Petugas: ' . $request->officer_name . '\n' : '';
+        $petugas = $request->officer_name ? 'Petugas: ' . $request->officer_name . "\n" : '';
         $liveData['additional_recommendation'] = $petugas . $saran;
         
         if ($request->filled('weight_override')) {
@@ -290,14 +290,14 @@ class MeasurementController extends Controller
         }
 
         $saran = $request->additional_recommendation ? $request->additional_recommendation : '';
-        $petugas = $request->officer_name ? 'Petugas: ' . $request->officer_name . '\n' : '';
+        $petugas = $request->officer_name ? 'Petugas: ' . $request->officer_name . "\n" : '';
         $latestMeasurement->additional_recommendation = $petugas . $saran;
         $latestMeasurement->save();
 
         $liveData = \Illuminate\Support\Facades\Cache::get("live_measurement_child_{$child->id}");
         if ($liveData) {
             $saran = $request->additional_recommendation ? $request->additional_recommendation : '';
-        $petugas = $request->officer_name ? 'Petugas: ' . $request->officer_name . '\n' : '';
+        $petugas = $request->officer_name ? 'Petugas: ' . $request->officer_name . "\n" : '';
         $liveData['additional_recommendation'] = $petugas . $saran;
             \Illuminate\Support\Facades\Cache::put("live_measurement_child_{$child->id}", $liveData, now()->addHours(2));
         }

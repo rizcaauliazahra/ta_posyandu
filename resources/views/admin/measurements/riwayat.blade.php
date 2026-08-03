@@ -19,6 +19,11 @@
                         $officerName = '-';
                         $fullRecommendation = $saranRaw;
                         $parts = explode("\n", (string)$saranRaw, 2);
+                        // Fallback untuk data lama yang tersimpan dengan literal \n
+                        if (count($parts) === 1 && str_contains((string)$saranRaw, '\n')) {
+                            $parts = explode('\n', (string)$saranRaw, 2);
+                        }
+                        
                         if (count($parts) > 1 && str_starts_with($parts[0], 'Petugas: ')) {
                             $officerName = str_replace('Petugas: ', '', $parts[0]);
                             $fullRecommendation = $parts[1];
